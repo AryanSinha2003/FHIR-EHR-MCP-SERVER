@@ -1,4 +1,3 @@
-## 🚀 Project Highlights
 
 <p align="center">
   <img src="https://img.shields.io/badge/AI%20Agent-Compatible-blueviolet?style=for-the-badge" />
