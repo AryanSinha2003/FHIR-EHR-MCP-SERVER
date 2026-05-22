@@ -3,6 +3,7 @@ import os
 from mcp.server.fastmcp import FastMCP
 
 # Initialize the MCP Server
+# Render sets the PORT env var; default to 8000 for local dev
 mcp = FastMCP("Custom-EHR-Server",host="0.0.0.0",port="8000")
 
 # =====================================================================
@@ -68,6 +69,38 @@ def upload_patient_bundle(file_path: str) -> str:
         f"   {file_path}\n"
         f"   ({entry_count} entries found)\n\n"
         f"All tools will now query this file."
+    )
+
+
+@mcp.tool()
+def upload_patient_bundle_json(json_content: str) -> str:
+    """Upload a FHIR patient bundle by providing the raw JSON content directly
+    as a string. Use this when the server is hosted remotely (e.g. on Render)
+    and local file paths are not accessible.
+
+    The agent should read the user's local file first, then pass its contents
+    to this tool.
+    """
+    global _active_bundle, _active_bundle_path
+
+    try:
+        _active_bundle = json.loads(json_content)
+        _active_bundle_path = "uploaded-via-json-content"
+    except json.JSONDecodeError as e:
+        return f"Error: Invalid JSON — {e}"
+
+    entry_count = len(_active_bundle.get("entry", []))
+    resource_types = set()
+    for entry in _active_bundle.get("entry", []):
+        rt = entry.get("resource", {}).get("resourceType")
+        if rt:
+            resource_types.add(rt)
+
+    return (
+        f"✅ Successfully loaded bundle from JSON content\n"
+        f"   ({entry_count} entries found)\n"
+        f"   Resource types: {', '.join(sorted(resource_types))}\n\n"
+        f"All tools will now query this bundle."
     )
 
 
@@ -359,4 +392,4 @@ def get_patient_explanation_of_benefits(patient_name: str) -> str:
 
 # Note: Horizon ignores the __main__ block when hosting, but we keep it so you can test locally
 if __name__ == "__main__":
-    mcp.run(transport='sse')
+    mcp.run(transport='sse')  # Render start command: python working_mcp_server.py
