@@ -3,7 +3,7 @@ import os
 from mcp.server.fastmcp import FastMCP
 
 # Initialize the MCP Server
-mcp = FastMCP("Custom-EHR-Server")
+mcp = FastMCP("Custom-EHR-Server",host="0.0.0.0",port="8000")
 
 # =====================================================================
 # ACTIVE BUNDLE STATE
