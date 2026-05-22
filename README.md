@@ -8,7 +8,7 @@
 </p>
 
 
-# 🏥 FHIR MCP Server — Dynamic EHR Tool Server
+# 🏥 FHIR MCP Server — Dynamic EHR Tool
 
 A **Model Context Protocol (MCP)** server that exposes **20 FHIR (Fast Healthcare Interoperability Resources)** resource types as callable tools, enabling AI agents and LLMs to query a patient's complete Electronic Health Record (EHR)
 
