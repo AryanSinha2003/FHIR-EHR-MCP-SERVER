@@ -11,9 +11,9 @@
 
 # 🏥 FHIR MCP Server — Dynamic EHR Tool Server
 
-A **Model Context Protocol (MCP)** server that exposes **20 FHIR (Fast Healthcare Interoperability Resources)** resource types as callable tools, enabling AI agents and LLMs to query a patient's complete Electronic Health Record (EHR) in real-time via a standards-compliant FHIR R4 API.
+A **Model Context Protocol (MCP)** server that exposes **20 FHIR (Fast Healthcare Interoperability Resources)** resource types as callable tools, enabling AI agents and LLMs to query a patient's complete Electronic Health Record (EHR)
 
-Built with **FastAPI**, transported over **Server-Sent Events (SSE)**, and designed for seamless integration with [PromptOpinion (PO)](https://promptopinion.com) workspaces and any MCP-compatible AI client.
+Built with **FastMCP**, transported over **Server-Sent Events (SSE)**, and designed for seamless integration with any MCP-compatible AI client.
 
 ---
 
